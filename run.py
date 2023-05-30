@@ -26,12 +26,54 @@ print(player)
 print(computer)
 print(computer_hidden)
 
+class Board:
 
-# Nessa função eu arrumo a matriz para parecer um tabuleiro de batalha naval
+    def __init__(self):
+        self.size = 6
+        self.board = [[' '] * self.size for _ in range(5)]
 
-#places the player boats
+    def print_board(self, is_computer_board=False):
 
-#place computer boats
+        print(' ', ' '.join(str(i) for i in range(1, self.size + 1)))
+        for i in range(5):
+            row = [' ' if cell == '' and is_computer_board else cell for cell in self.board[i]]
+            print(i + 1, ' '.join(row))
+
+class BattleshipGame:
+
+    def __init__(self):
+        self.player_board = Board()
+        self.computer_board = Board()
+
+    def place_ships(self, board):
+
+        for _ in range(4):
+            while True:
+                row = random.randint(0, 4)
+                col = random.randint(0, 5)
+                if board.board[row][col] == ' ':
+                    board.board[row][col] = 'B'
+                    break
+
+    def print_boards(self):
+
+        print("Computer's board:")
+        self.computer_board.print_board(is_computer_board=True)
+
+        print("\nPlayer's board:")
+        self.player_board.print_board()
+
+# Create an instance of the BattleshipGame class
+game = BattleshipGame()
+
+# Place ships on the boards
+game.place_ships(game.player_board)
+game.place_ships(game.computer_board)
+
+# Print the boards
+game.print_boards()
+
+#get the players name and show in the init message
 
 #shots from the player 
 
