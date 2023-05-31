@@ -1,15 +1,5 @@
 import random
 
-#battleship game
-
-# welcome game 
-
-print("Welcome to Guess Battleship Game!")
-print("All you have to do is find the computers boat and sinks them")
-print("Follow the instructions and good luck.")
-    
-#insert matrices
-
 class Board:
 
     def __init__(self):
@@ -53,7 +43,7 @@ class BattleshipGame:
         print("Follow the instructions and good luck.")
         print()
 
-    def get_player_name(self): #get the players name and show in the init message 
+    def get_player_name(self): 
         """
         Gets the player's name and creates a Player object.
         """
@@ -113,5 +103,3 @@ game.print_boards()
 #ships remaining
 
 #end game 
-
-
