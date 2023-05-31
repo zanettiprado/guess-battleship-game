@@ -20,12 +20,17 @@ class Board:
 
         print(' ', ' '.join(str(i) for i in range(1, self.size + 1)))
         for i in range(5):
-            row = [' ' if cell == ' ' and is_computer_board else cell for cell in self.board[i]]
-            print(i + 1, ' '.join(row))
+            row = [' ' if cell == 'B' and is_computer_board else cell for cell in self.board[i]]
+            print(i+1, ' '.join(row))
 
 class Player:
 
     def __init__(self, name):
+        """
+        Represents a player in the game.
+        using the string name set the player's name.
+        using the player name set the score's for this player. 
+        """
         self.name = name
         self.score = 0
 
@@ -40,13 +45,18 @@ class BattleshipGame:
         self.computer_board = Board()
 
     def welcome_message(self):
+        """
+        Displays a welcome message to the players.
+        """
         print("Welcome to Guess Battleship Game!")
         print("All you have to do is find the computer's boats and sink them.")
         print("Follow the instructions and good luck.")
         print()
 
     def get_player_name(self): #get the players name and show in the init message 
-        
+        """
+        Gets the player's name and creates a Player object.
+        """
         name = input("Enter your name: ")
         self.player = Player(name)
 
