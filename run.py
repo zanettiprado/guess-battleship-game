@@ -27,12 +27,19 @@ class Player:
     def get_player_name(self):
         name = input("Enter your name: ")
         self.player = Player(name)
+
+    def get_guess(self):
+        col = input("Guess the column (1-6): ")
+        row = input("Guess the row (1-5): ")
+        return int(row) - 1, int(col) - 1
     
 
 class BattleshipGame:
     def __init__(self):
+        self.player = None
         self.player_board = Board()
         self.computer_board = Board()
+
 
     def welcome_message(self):
         """
@@ -40,7 +47,7 @@ class BattleshipGame:
         """
         print("Welcome to Guess Battleship Game!")
         print("All you have to do is find the computer's boats and sink them.")
-        print("Follow the instructions and good luck.")
+        print("Follow the instructions and good luck!")
         print()
 
     def get_player_name(self): 
@@ -60,11 +67,17 @@ class BattleshipGame:
                     board.board[row][col] = 'B'
                     break
 
-    def print_boards(self):
+    def get_guess(self, is_player_turn):
+        if is_player_turn:
+            return self.player.get_guess()
+        else:
+            col = random.randint(1, 6)
+            row = random.randint(1, 5)
+            return row - 1, col - 1
 
+    def print_boards(self):
         print("Computer's board:")
         self.computer_board.print_board(is_computer_board=True)
-
         print("\nPlayer's board:")
         self.player_board.print_board()
     
