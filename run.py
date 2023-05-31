@@ -23,14 +23,35 @@ class Board:
             row = [' ' if cell == ' ' and is_computer_board else cell for cell in self.board[i]]
             print(i + 1, ' '.join(row))
 
-class BattleshipGame:
+class Player:
 
+    def __init__(self, name):
+        self.name = name
+        self.score = 0
+
+    def get_player_name(self):
+        name = input("Enter your name: ")
+        self.player = Player(name)
+    
+
+class BattleshipGame:
     def __init__(self):
         self.player_board = Board()
         self.computer_board = Board()
 
-    def place_ships(self, board):
+    def welcome_message(self):
+        print("Welcome to Guess Battleship Game!")
+        print("All you have to do is find the computer's boats and sink them.")
+        print("Follow the instructions and good luck.")
+        print()
 
+    def get_player_name(self): #get the players name and show in the init message 
+        
+        name = input("Enter your name: ")
+        self.player = Player(name)
+
+
+    def place_ships(self, board):
         for _ in range(4):
             while True:
                 row = random.randint(0, 4)
@@ -46,8 +67,25 @@ class BattleshipGame:
 
         print("\nPlayer's board:")
         self.player_board.print_board()
+    
+    def start_game(self):
+        self.welcome_message()
+        self.get_player_name()
 
-# Create an instance of the BattleshipGame class
+        # Place ships on the boards
+        self.place_ships(self.player_board)
+        self.place_ships(self.computer_board)
+
+        # Print the boards
+        self.print_boards()
+
+
+game = BattleshipGame()
+
+# Start the game
+game.start_game()
+
+
 game = BattleshipGame()
 
 # Place ships on the boards
@@ -57,7 +95,6 @@ game.place_ships(game.computer_board)
 # Print the boards
 game.print_boards()
 
-#get the players name and show in the init message
 
 #shots from the player 
 
