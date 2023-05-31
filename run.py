@@ -92,6 +92,28 @@ class BattleshipGame:
         # Print the boards
         self.print_boards()
 
+        is_player_turn = True
+        while True:
+            # Get the guess
+            if is_player_turn:
+                print(f"{self.player.name}'s turn:")
+                row, col = self.get_guess(is_player_turn)
+            else:
+                print("Computer's turn:")
+                row, col = self.get_guess(is_player_turn)
+
+            # Check if the guess hits or misses a ship
+            if self.computer_board.board[row][col] == 'B':
+                print("Hit!")
+                self.computer_board.board[row][col] = 'X'
+            else:
+                print("Miss!")
+                        # Switch turns
+            is_player_turn = not is_player_turn
+
+            # Print the updated boards
+            self.print_boards()
+
 
 game = BattleshipGame()
 
