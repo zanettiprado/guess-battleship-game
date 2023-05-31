@@ -8,23 +8,7 @@ print("Welcome to Guess Battleship Game!")
 print("All you have to do is find the computers boat and sinks them")
 print("Follow the instructions and good luck.")
     
-#insert matrices 
-
-player = []
-computer = []
-computer_hidden= []
-
-#display the game board for player and computer 
-for x in range(4):
-    player.append(["O"] * 6)
-for y in range(4):
-    computer.append(["O"] * 6)
-for z in range(4):
-    computer_hidden.append(["O"] * 6)
-
-print(player)
-print(computer)
-print(computer_hidden)
+#insert matrices
 
 class Board:
 
@@ -36,7 +20,7 @@ class Board:
 
         print(' ', ' '.join(str(i) for i in range(1, self.size + 1)))
         for i in range(5):
-            row = [' ' if cell == '' and is_computer_board else cell for cell in self.board[i]]
+            row = [' ' if cell == ' ' and is_computer_board else cell for cell in self.board[i]]
             print(i + 1, ' '.join(row))
 
 class BattleshipGame:
