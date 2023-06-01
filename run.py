@@ -1,6 +1,11 @@
 import random
 
 class Board:
+    """
+    Represents the game board.
+    it shows the size of the board.
+    and the board The 2D list representing the board.
+    """
 
     def __init__(self):
         self.size = 6
@@ -68,6 +73,9 @@ class BattleshipGame:
                     break
 
     def get_guess(self, is_player_turn):
+        """
+        Gets the player's or computer's guess.
+        """
         if is_player_turn:
             return self.player.get_guess()
         else:
@@ -82,19 +90,24 @@ class BattleshipGame:
         self.player_board.print_board()
     
     def start_game(self):
+        """ 
+        Place ships on the boards and Print the boards
+        Using While Get the guess Check if the guess hits or misses a ship and Switch turns
+        
+        """
         self.welcome_message()
         self.get_player_name()
 
-        # Place ships on the boards
+        # 
         self.place_ships(self.player_board)
         self.place_ships(self.computer_board)
 
-        # Print the boards
+        # 
         self.print_boards()
 
         is_player_turn = True
         while True:
-            # Get the guess
+            
             if is_player_turn:
                 print(f"{self.player.name}'s turn:")
                 row, col = self.get_guess(is_player_turn)
@@ -102,13 +115,13 @@ class BattleshipGame:
                 print("Computer's turn:")
                 row, col = self.get_guess(is_player_turn)
 
-            # Check if the guess hits or misses a ship
+            # 
             if self.computer_board.board[row][col] == 'B':
                 print("Hit!")
                 self.computer_board.board[row][col] = 'X'
             else:
                 print("Miss!")
-                        # Switch turns
+                        # 
             is_player_turn = not is_player_turn
 
             # Print the updated boards
