@@ -45,6 +45,7 @@ class Player:
                 return row, col
             else:
                 print("Invalid input. Try again.")
+
     @staticmethod
     def is_valid_input(value, max_value):
         try:
@@ -93,15 +94,24 @@ class BattleshipGame:
         if is_player_turn:
             return self.player.get_guess()
         else:
-            col = random.randint(1, 6)
-            row = random.randint(1, 5)
-            return row - 1, col - 1
-
+            while True:
+                row = random.randint(0, 4)
+                col = random.randint(0, 5)
+                if self.player_board.board[row][col] != 'X':
+                    if self.player_board.board[row][col] == 'B':
+                        self.player_board.board[row][col] = '*'
+                    else:
+                        self.player_board.board[row][col] = 'X'
+                    return row, col
+                    
     def print_boards(self):
-        print("Computer's board:")
-        self.computer_board.print_board(is_computer_board=True)
+        """
+        Prints the player's and computer's boards.
+        """
         print("\nPlayer's board:")
         self.player_board.print_board()
+        print("\nComputer's board:")
+        self.computer_board.print_board(is_computer_board=True)
     
     def start_game(self):
         """ 
@@ -111,28 +121,22 @@ class BattleshipGame:
         """
         self.welcome_message()
         self.get_player_name()
-
-        # 
         self.place_ships(self.player_board)
         self.place_ships(self.computer_board)
-
-        # 
         self.print_boards()
 
         is_player_turn = True
         while True:
-            
             if is_player_turn:
                 print(f"{self.player.name}'s turn:")
                 row, col = self.get_guess(is_player_turn)
             else:
                 print("Computer's turn:")
                 row, col = self.get_guess(is_player_turn)
-
             
             if self.computer_board.board[row][col] == 'B':
                 print("Hit!")
-                self.computer_board.board[row][col] = 'X'
+                self.player.score += 1
             else:
                 print("Miss!")
              
