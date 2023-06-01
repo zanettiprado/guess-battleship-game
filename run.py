@@ -57,6 +57,7 @@ class Player:
 class BattleshipGame:
     def __init__(self):
         self.player = None
+        self.computer = Player("Computer")
         self.player_board = Board()
         self.computer_board = Board()
 
@@ -79,6 +80,9 @@ class BattleshipGame:
 
 
     def place_ships(self, board):
+        """
+        Places the battleships on the board.
+        """
         for _ in range(4):
             while True:
                 row = random.randint(0, 4)
@@ -86,6 +90,12 @@ class BattleshipGame:
                 if board.board[row][col] == ' ':
                     board.board[row][col] = 'B'
                     break
+
+    def print_boards(self):
+        print("Computer's board:")
+        self.computer_board.print_board(is_computer_board=True)
+        print("\nPlayer's board:")
+        self.player_board.print_board()
 
     def get_guess(self, is_player_turn):
         """
@@ -97,22 +107,16 @@ class BattleshipGame:
             while True:
                 row = random.randint(0, 4)
                 col = random.randint(0, 5)
-                if self.player_board.board[row][col] != 'X':
-                    if self.player_board.board[row][col] == 'B':
-                        self.player_board.board[row][col] = '*'
+                if self.computer_board.board[row][col] != 'X':
+                    if self.computer_board.board[row][col] == 'B':
+                        self.computer_board.board[row][col] = '*'
+                        print("The computer hit one of your battleships!")
+                        self.player.score += 1
                     else:
-                        self.player_board.board[row][col] = 'X'
+                        self.computer_board.board[row][col] = 'X'
+                        print("The computer missed your battleships.")
                     return row, col
-                    
-    def print_boards(self):
-        """
-        Prints the player's and computer's boards.
-        """
-        print("\nPlayer's board:")
-        self.player_board.print_board()
-        print("\nComputer's board:")
-        self.computer_board.print_board(is_computer_board=True)
-    
+                        
     def start_game(self):
         """ 
         Place ships on the boards and Print the boards
@@ -121,45 +125,51 @@ class BattleshipGame:
         """
         self.welcome_message()
         self.get_player_name()
+
         self.place_ships(self.player_board)
         self.place_ships(self.computer_board)
+
         self.print_boards()
 
         is_player_turn = True
         while True:
             if is_player_turn:
-                print(f"{self.player.name}'s turn:")
-                row, col = self.get_guess(is_player_turn)
+                print(f"\n{self.player.name}'s turn:")
             else:
-                print("Computer's turn:")
-                row, col = self.get_guess(is_player_turn)
+                print("\nComputer's turn:")
+
+            row, col = self.get_guess(is_player_turn)
             
-            if self.computer_board.board[row][col] == 'B':
-                print("Hit!")
-                self.player.score += 1
+            if is_player_turn:
+                if self.computer_board.board[row][col] == 'B':
+                    print("Hit!")
+                    self.player.score += 1
+                else:
+                    print("Miss!")
             else:
-                print("Miss!")
-             
+                if self.player_board.board[row][col] == 'B':
+                    print("The computer sank one of your battleships!")
+                else:
+                    print("The computer missed its guess.")
+
             is_player_turn = not is_player_turn
 
-            # Print the updated boards
-            self.print_boards()
+            if self.player.score == 4:
+                print(f"\nCongratulations, {self.player.name}! You won!")
+                break
+            elif self.player.score > 2:
+                print("You are getting close!")
 
+            self.print_boards()
 
 game = BattleshipGame()
 
 # Start the game
 game.start_game()
 
-
-game = BattleshipGame()
-
 # Place ships on the boards
-game.place_ships(game.player_board)
-game.place_ships(game.computer_board)
 
 # Print the boards
-game.print_boards()
 
 
 #shots from the player 
