@@ -33,11 +33,25 @@ class Player:
         name = input("Enter your name: ")
         self.player = Player(name)
 
+
     def get_guess(self):
-        col = input("Guess the column (1-6): ")
-        row = input("Guess the row (1-5): ")
-        return int(row) - 1, int(col) - 1
-    
+        while True:
+            col = input("Guess the column (1-6): ")
+            row = input("Guess the row (1-5): ")
+
+            if self.is_valid_input(col, 6) and self.is_valid_input(row, 5):
+                col = int(col) - 1
+                row = int(row) - 1
+                return row, col
+            else:
+                print("Invalid input. Try again.")
+    @staticmethod
+    def is_valid_input(value, max_value):
+        try:
+            value = int(value)
+            return 1 <= value <= max_value
+        except ValueError:
+            return False
 
 class BattleshipGame:
     def __init__(self):
@@ -115,13 +129,13 @@ class BattleshipGame:
                 print("Computer's turn:")
                 row, col = self.get_guess(is_player_turn)
 
-            # 
+            
             if self.computer_board.board[row][col] == 'B':
                 print("Hit!")
                 self.computer_board.board[row][col] = 'X'
             else:
                 print("Miss!")
-                        # 
+             
             is_player_turn = not is_player_turn
 
             # Print the updated boards
