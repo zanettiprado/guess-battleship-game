@@ -90,7 +90,7 @@ class BattleshipGame:
     def print_boards(self):
         print("Computer's board:")
         self.computer_board.print_board(is_computer_board=True)
-        print("\nPlayer's board:")
+        print(f"\n{self.player.name} board:")
         self.player_board.print_board()
 
     def get_guess(self, is_player_turn):
@@ -105,7 +105,7 @@ class BattleshipGame:
                 col = random.randint(0, 5)
                 if self.computer_board.board[row][col] != 'X':
                     return row, col
-                    
+
     def start_game(self):
         """
         Starts the battleship game.
@@ -142,11 +142,15 @@ class BattleshipGame:
                 else:
                     print("The computer missed its guess.")
                     self.player_board.board[row][col] = 'X'
+            print(f"Player Score: {self.player.score}")
+            print(f"Computer Score: {self.computer.score}")
 
             is_player_turn = not is_player_turn
 
             if self.player.score == 4:
                 print(f"\nCongratulations, {self.player.name}! You won!")
+            elif self.computer.score == 4:
+                print("The computer sank all your battleships! You lost!")
                 break
             elif self.player.score > 2:
                 print("You are getting close!")
