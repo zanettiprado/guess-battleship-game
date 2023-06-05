@@ -1,5 +1,6 @@
 import random
 
+
 class Board:
     """
     Represents the game board.
@@ -19,11 +20,12 @@ class Board:
             row = [' ' if cell == 'B' and is_computer_board else cell for cell in self.board[i]]
             print(i+1, ' '.join(row))
 
+
 class Player:
     """
     Represents a player in the game.
     using the string name set the player's name.
-    using the player name set the score's for this player. 
+    using the player name set the score's for this player.
     """
     def __init__(self, name):
         self.name = name
@@ -49,6 +51,7 @@ class Player:
         except ValueError:
             return False
 
+
 class BattleshipGame:
     """
     Represents the Battleship game.
@@ -68,7 +71,7 @@ class BattleshipGame:
         print("Follow the instructions and good luck!")
         print()
 
-    def get_player_name(self): 
+    def get_player_name(self):
         """
         Gets the player's name and creates a Player object.
         """
@@ -118,7 +121,8 @@ class BattleshipGame:
 
         self.print_boards()
 
-        is_player_turn = True                      
+        is_player_turn = True
+
         while True:
             if is_player_turn:
                 print(f"\n{self.player.name}'s turn:")
@@ -129,11 +133,11 @@ class BattleshipGame:
 
             if is_player_turn:
                 if self.computer_board.board[row][col] == 'B':
-                    print("Hit!")
+                    print("You Hit!")
                     self.player.score += 1
                     self.computer_board.board[row][col] = '*'
                 else:
-                    print("Miss!")
+                    print("You Missed!")
                     self.computer_board.board[row][col] = 'X'
             else:
                 if self.player_board.board[row][col] == 'B':
@@ -142,7 +146,7 @@ class BattleshipGame:
                 else:
                     print("The computer missed its guess.")
                     self.player_board.board[row][col] = 'X'
-            print(f"Player Score: {self.player.score}")
+            print(f"{self.player.name} Score: {self.player.score}")
             print(f"Computer Score: {self.computer.score}")
 
             is_player_turn = not is_player_turn
@@ -157,7 +161,21 @@ class BattleshipGame:
 
             self.print_boards()
 
+    def end_game(self):
+        """
+        Displays the end of the game and asks the player if they want to play again.
+        """
+        play_again = input("Do you want to play again? (yes/no): ")
+        if play_again.lower() == "yes":
+            self.player.score = 0
+            self.computer.score = 0
+            self.player_board = Board()
+            self.computer_board = Board()
+            self.start_game()
+        else:
+            print("Thank you for playing Battleship Game!")  
+         
 game = BattleshipGame()
 game.start_game()
 
-#end game 
+#end game #add end game function #add play again 
