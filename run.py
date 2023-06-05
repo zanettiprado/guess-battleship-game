@@ -4,9 +4,10 @@ import random
 class Board:
     """
     Represents the game board.
-    it shows the size of the board.
+    Shows the size of the board.
     and the board The 2D list representing the board.
     """
+
     def __init__(self):
         self.size = 6
         self.board = [[' '] * self.size for _ in range(5)]
@@ -18,15 +19,16 @@ class Board:
         print(' ', ' '.join(str(i) for i in range(1, self.size + 1)))
         for i in range(5):
             row = [' ' if cell == 'B' and is_computer_board else cell for cell in self.board[i]]
-            print(i+1, ' '.join(row))
+            print(i + 1, ' '.join(row))
 
 
 class Player:
     """
     Represents a player in the game.
-    using the string name set the player's name.
-    using the player name set the score's for this player.
+    Using the string name set the player's name.
+    Using the player name set the score's for this player.
     """
+
     def __init__(self, name):
         self.name = name
         self.score = 0
@@ -56,6 +58,7 @@ class BattleshipGame:
     """
     Represents the Battleship game.
     """
+
     def __init__(self):
         self.player = None
         self.computer = Player("Computer")
@@ -131,6 +134,11 @@ class BattleshipGame:
 
             row, col = self.get_guess(is_player_turn)
 
+            if row is None and col is None:
+                print("\nAborting the game...")
+                self.end_game()
+                break
+
             if is_player_turn:
                 if self.computer_board.board[row][col] == 'B':
                     print("You Hit!")
@@ -153,8 +161,11 @@ class BattleshipGame:
 
             if self.player.score == 4:
                 print(f"\nCongratulations, {self.player.name}! You won!")
+                self.end_game()
+                break
             elif self.computer.score == 4:
                 print("The computer sank all your battleships! You lost!")
+                self.end_game()
                 break
             elif self.player.score > 2:
                 print("You are getting close!")
@@ -173,9 +184,7 @@ class BattleshipGame:
             self.computer_board = Board()
             self.start_game()
         else:
-            print("Thank you for playing Battleship Game!")  
-         
+            print("Thank you for playing Battleship Game!")
+
 game = BattleshipGame()
 game.start_game()
-
-#end game #add end game function #add play again 
