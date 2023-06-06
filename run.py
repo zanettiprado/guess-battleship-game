@@ -39,15 +39,18 @@ class Player:
             col = input("Guess the column (1-6): ")
             row = input("Guess the row (1-5): ")
 
+            if col == '9' or row == '9':
+                return None, None 
+
             if self.is_valid_input(col, 6) and self.is_valid_input(row, 5):
                 col = int(col) - 1
                 row = int(row) - 1
-                
+
                 if (row, col) in self.guesses:
                     print("You cannot guess the same coordinates more than once.")
                     continue
-                self.guesses.add((row, col))
 
+                self.guesses.add((row, col))
                 return row, col
             else:
                 print("Invalid input. Try again.")
@@ -68,7 +71,7 @@ class BattleshipGame:
 
     def __init__(self):
         self.player = None
-        self.computer = Player("Computer")
+        self.computer = Player("COMPUTER")
         self.player_board = Board()
         self.computer_board = Board()
 
@@ -76,9 +79,15 @@ class BattleshipGame:
         """
         Displays a welcome message to the players.
         """
-        print("Welcome to Guess Battleship Game!")
-        print("All you have to do is find the computer's boats and sink them.")
-        print("Follow the instructions and good luck!")
+        border = "--------------------------------------------------"
+        message = "|  Welcome to Guess Battleship Game!             |\n" \
+                  "|  All you have to do is find the computer's     |\n" \
+                  "|  boats and sink them. Follow the instructions  |\n" \
+                  "|  and good luck. Insert 9 as a guess to abort   |\n" \
+                  "|  the game anytime. (number of boats: 4)        |"
+        print(border)
+        print(message)
+        print(border)
         print()
 
     def get_player_name(self):
@@ -86,7 +95,7 @@ class BattleshipGame:
         Gets the player's name and creates a Player object.
         """
         name = input("Enter your name: ")
-        self.player = Player(name)
+        self.player = Player(name.upper())
 
     def place_ships(self, board):
         """
@@ -101,7 +110,7 @@ class BattleshipGame:
                     break
 
     def print_boards(self):
-        print("Computer's board:")
+        print("COMPUTER's board:")
         self.computer_board.print_board(is_computer_board=True)
         print(f"\n{self.player.name} board:")
         self.player_board.print_board()
@@ -158,11 +167,13 @@ class BattleshipGame:
                 if self.player_board.board[row][col] == 'B':
                     print("The computer sank one of your battleships!")
                     self.player_board.board[row][col] = '*'
+                    self.computer.score += 1
                 else:
                     print("The computer missed its guess.")
                     self.player_board.board[row][col] = 'X'
-            print(f"{self.player.name} Score: {self.player.score}")
-            print(f"Computer Score: {self.computer.score}")
+
+            print(f"{self.player.name}'s Score: {self.player.score}")
+            print(f"COMPUTER's Score: {self.computer.score}")
 
             is_player_turn = not is_player_turn
 
