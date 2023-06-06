@@ -18,9 +18,12 @@ class Board:
         """
         print(' ', ' '.join(str(i) for i in range(1, self.size + 1)))
         for i in range(5):
-            row = [' ' if cell == 'B' and is_computer_board 
-            else cell for cell in self.board[i]]
-            print(i + 1, ' '.join(row))
+            row = [
+                ' ' if cell == 'B' and is_computer_board else cell
+                for cell in self.board[i]
+            ]
+            row_string = ' '.join(row)
+            print(i + 1, row_string)
 
 
 class Player:
@@ -41,14 +44,14 @@ class Player:
             row = input("Guess the row (1-5): ")
 
             if col == '9' or row == '9':
-                return None, None 
+                return None, None
 
             if self.is_valid_input(col, 6) and self.is_valid_input(row, 5):
                 col = int(col) - 1
                 row = int(row) - 1
 
                 if (row, col) in self.guesses:
-                    print("You cannot guess the same coordinates more than once.")
+                    print("You can't try the same coordinate more than once.")
                     continue
 
                 self.guesses.add((row, col))
@@ -68,9 +71,9 @@ class Player:
 class BattleshipGame:
     """
     Represents the Battleship game.
-    The main class in the code showing the welcome message and get players name. 
+    The main class in the code shows the welcome message and get players name.
     Method to place the boats randomly and start the battle ship game
-    The last function will finish the game get all metrics. 
+    The last function will finish the game get all metrics.
     """
 
     def __init__(self):
@@ -83,7 +86,7 @@ class BattleshipGame:
         """
         Displays a welcome message to the players.
         """
-        border = ("-" *50)
+        border = ("-" * 50)
         message = "|  Welcome to the Guess Battleship Game!         |\n" \
                   "|  All you have to do is find the computer's     |\n" \
                   "|  boats and sink them. Follow the instructions  |\n" \
@@ -100,7 +103,7 @@ class BattleshipGame:
         """
         name = input("Enter your name: ")
         self.player = Player(name.upper())
-        
+
     def place_ships(self, board):
         """
         Places the battleships on the board.
@@ -195,7 +198,8 @@ class BattleshipGame:
 
     def end_game(self):
         """
-        Displays the end of the game and asks the player if they want to play again.
+        Displays the end of the game and asks the player if
+        they want to play again.
         """
         play_again = input("Do you want to play again? (yes/no): ")
         if play_again.lower() == "yes":
@@ -206,6 +210,7 @@ class BattleshipGame:
             self.start_game()
         else:
             print("Thank you for playing Battleship Game!")
+
 
 game = BattleshipGame()
 game.start_game()
