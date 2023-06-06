@@ -149,17 +149,13 @@ class BattleshipGame:
         while True:
             if is_player_turn:
                 print(f"\n{self.player.name}'s turn:")
-            else:
-                print("\nComputer's turn:")
+                row, col = self.get_guess(is_player_turn)
 
-            row, col = self.get_guess(is_player_turn)
+                if row is None and col is None:
+                    print("\nAborting the game...")
+                    self.end_game()
+                    break
 
-            if row is None and col is None:
-                print("\nAborting the game...")
-                self.end_game()
-                break
-
-            if is_player_turn:
                 if self.computer_board.board[row][col] == 'B':
                     print("You Hit!")
                     self.player.score += 1
@@ -168,6 +164,9 @@ class BattleshipGame:
                     print("You Missed!")
                     self.computer_board.board[row][col] = 'X'
             else:
+                print("\nComputer's turn:")
+                row, col = self.get_guess(is_player_turn)
+
                 if self.player_board.board[row][col] == 'B':
                     print("The computer sank one of your battleships!")
                     self.player_board.board[row][col] = '*'
