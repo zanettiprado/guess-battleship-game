@@ -18,7 +18,8 @@ class Board:
         """
         print(' ', ' '.join(str(i) for i in range(1, self.size + 1)))
         for i in range(5):
-            row = [' ' if cell == 'B' and is_computer_board else cell for cell in self.board[i]]
+            row = [' ' if cell == 'B' and is_computer_board 
+            else cell for cell in self.board[i]]
             print(i + 1, ' '.join(row))
 
 
@@ -67,6 +68,9 @@ class Player:
 class BattleshipGame:
     """
     Represents the Battleship game.
+    The main class in the code showing the welcome message and get players name. 
+    Method to place the boats randomly and start the battle ship game
+    The last function will finish the game get all metrics. 
     """
 
     def __init__(self):
@@ -79,8 +83,8 @@ class BattleshipGame:
         """
         Displays a welcome message to the players.
         """
-        border = "--------------------------------------------------"
-        message = "|  Welcome to Guess Battleship Game!             |\n" \
+        border = ("-" *50)
+        message = "|  Welcome to the Guess Battleship Game!         |\n" \
                   "|  All you have to do is find the computer's     |\n" \
                   "|  boats and sink them. Follow the instructions  |\n" \
                   "|  and good luck. Insert 9 as a guess to abort   |\n" \
@@ -96,7 +100,7 @@ class BattleshipGame:
         """
         name = input("Enter your name: ")
         self.player = Player(name.upper())
-
+        
     def place_ships(self, board):
         """
         Places the battleships on the board.
