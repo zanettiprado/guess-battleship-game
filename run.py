@@ -30,6 +30,7 @@ class Player:
     """
 
     def __init__(self, name):
+        self.guesses = set()
         self.name = name
         self.score = 0
 
@@ -41,6 +42,12 @@ class Player:
             if self.is_valid_input(col, 6) and self.is_valid_input(row, 5):
                 col = int(col) - 1
                 row = int(row) - 1
+                
+                if (row, col) in self.guesses:
+                    print("You cannot guess the same coordinates more than once.")
+                    continue
+                self.guesses.add((row, col))
+
                 return row, col
             else:
                 print("Invalid input. Try again.")
