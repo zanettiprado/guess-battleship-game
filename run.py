@@ -16,6 +16,7 @@ class Board:
         """
         Prints the current state of the board.
         """
+        print('-' * (self.size * 2 + 1))
         print(' ', ' '.join(str(i) for i in range(1, self.size + 1)))
         for i in range(5):
             row = [
@@ -40,8 +41,8 @@ class Player:
 
     def get_guess(self):
         while True:
-            col = input("Guess the column (1-6): ")
-            row = input("Guess the row (1-5): ")
+            col = input("Guess the column (1-6):\n")
+            row = input("Guess the row (1-5):\n")
 
             if col == '9' or row == '9':
                 return None, None
@@ -101,7 +102,7 @@ class BattleshipGame:
         """
         Gets the player's name and creates a Player object.
         """
-        name = input("Enter your name: ")
+        name = input("Enter your name:\n")
         self.player = Player(name.upper())
 
     def place_ships(self, board):
@@ -155,7 +156,7 @@ class BattleshipGame:
                 row, col = self.get_guess(is_player_turn)
 
                 if row is None and col is None:
-                    print("\nAborting the game...")
+                    print("\nAborting the game... 3... 2... 1... Bye")
                     self.end_game()
                     break
 
@@ -201,7 +202,7 @@ class BattleshipGame:
         Displays the end of the game and asks the player if
         they want to play again.
         """
-        play_again = input("Do you want to play again? (yes/no): ")
+        play_again = input("Do you want to play again? (yes/no):\n")
         if play_again.lower() == "yes":
             self.player.score = 0
             self.computer.score = 0
