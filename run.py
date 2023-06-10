@@ -39,6 +39,9 @@ class Player:
         self.name = name
         self.score = 0
 
+    class InvalidInputError(Exception):
+        pass
+
     def get_guess(self):
         while True:
             col = input("Guess the column (1-6):\n")
@@ -47,9 +50,15 @@ class Player:
             if col == '9' or row == '9':
                 return None, None
 
-            if self.is_valid_input(col, 6) and self.is_valid_input(row, 5):
-                col = int(col) - 1
-                row = int(row) - 1
+            try:
+                col = int(col)
+                row = int(row)
+
+                if not self.is_valid_input(col, 6) or not self.is_valid_input(row, 5):
+                    raise self.InvalidInputError
+
+                col -= 1
+                row -= 1
 
                 if (row, col) in self.guesses:
                     print("You can't try the same coordinate more than once.")
@@ -57,8 +66,11 @@ class Player:
 
                 self.guesses.add((row, col))
                 return row, col
-            else:
+
+            except ValueError:
                 print("Invalid input. Try again.")
+            except self.InvalidInputError:
+                print("Invalid input. Guess out of range. Try again.")
 
     @staticmethod
     def is_valid_input(value, max_value):
@@ -140,63 +152,67 @@ class BattleshipGame:
         """
         Starts the battleship game.
         """
-        self.welcome_message()
-        self.get_player_name()
+        try:
+            self.welcome_message()
+            self.get_player_name()
 
-        self.place_ships(self.player_board)
-        self.place_ships(self.computer_board)
-
-        self.print_boards()
-
-        is_player_turn = True
-
-        while True:
-            if is_player_turn:
-                print(f"\n{self.player.name}'s turn:")
-                row, col = self.get_guess(is_player_turn)
-
-                if row is None and col is None:
-                    print("\nAborting the game... 3... 2... 1... Bye")
-                    self.end_game()
-                    break
-
-                if self.computer_board.board[row][col] == 'B':
-                    print("You Hit!")
-                    self.player.score += 1
-                    self.computer_board.board[row][col] = '*'
-                else:
-                    print("You Missed!")
-                    self.computer_board.board[row][col] = 'X'
-            else:
-                print("\nComputer's turn:")
-                row, col = self.get_guess(is_player_turn)
-
-                if self.player_board.board[row][col] == 'B':
-                    print("The computer sank one of your battleships!")
-                    self.player_board.board[row][col] = '*'
-                    self.computer.score += 1
-                else:
-                    print("The computer missed its guess.")
-                    self.player_board.board[row][col] = 'X'
-
-            print(f"{self.player.name}'s Score: {self.player.score}")
-            print(f"COMPUTER's Score: {self.computer.score}")
-
-            is_player_turn = not is_player_turn
-
-            if self.player.score == 4:
-                print(f"\nCongratulations, {self.player.name}! You won!")
-                self.end_game()
-                break
-            elif self.computer.score == 4:
-                print("The computer sank all your battleships! You lost!")
-                self.end_game()
-                break
-            elif self.player.score > 2:
-                print("You are getting close!")
+            self.place_ships(self.player_board)
+            self.place_ships(self.computer_board)
 
             self.print_boards()
 
+            is_player_turn = True
+
+            while True:
+                if is_player_turn:
+                    print(f"\n{self.player.name}'s turn:")
+                    row, col = self.get_guess(is_player_turn)
+
+                    if row is None and col is None:
+                        print("\nAborting the game... 3... 2... 1... Bye")
+                        self.end_game()
+                        break
+
+                    if self.computer_board.board[row][col] == 'B':
+                        print("You Hit!")
+                        self.player.score += 1
+                        self.computer_board.board[row][col] = '*'
+                    else:
+                        print("You Missed!")
+                        self.computer_board.board[row][col] = 'X'
+                else:
+                    print("\nComputer's turn:")
+                    row, col = self.get_guess(is_player_turn)
+
+                    if self.player_board.board[row][col] == 'B':
+                        print("The computer sank one of your battleships!")
+                        self.player_board.board[row][col] = '*'
+                        self.computer.score += 1
+                    else:
+                        print("The computer missed its guess.")
+                        self.player_board.board[row][col] = 'X'
+
+                print(f"{self.player.name}'s Score: {self.player.score}")
+                print(f"COMPUTER's Score: {self.computer.score}")
+
+                is_player_turn = not is_player_turn
+
+                if self.player.score == 4:
+                    print(f"\nCongratulations, {self.player.name}! You won!")
+                    self.end_game()
+                    break
+                elif self.computer.score == 4:
+                    print("The computer sank all your battleships! You lost!")
+                    self.end_game()
+                    break
+                elif self.player.score > 2:
+                    print("You are getting close!")
+
+                self.print_boards()
+
+        except Exception as e:
+            print("An error occurred during the game:", str(e))
+            self.end_game()
     def end_game(self):
         """
         Displays the end of the game and asks the player if
