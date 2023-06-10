@@ -2,7 +2,7 @@
 
 ## Overview
 The Battleship Game is a classic board game where players try to sink each other's battleships by guessing the
-coordinates on the opponent's board. In this game all you have to do is find computers boats and sink them. 
+coordinates on the opponent's board. In this game all you have to do is find computer's boats and sink them. 
 Each boat has just one space in the board. After find 4 boats you win 
 
  ![New game](./Assets/Images/resposiviness.PNG) 
@@ -34,9 +34,9 @@ You can try here the [Live version](https://guess-battleship-game.herokuapp.com/
 
 # How to Play
 The game starts with the placement of battleships on both the player's and the computer's board.
-But before player will find a welcome board with first instructions and how to play the game. 
-Just underneath the board player will find a clear space to insert his name. He can type any kind of 
-name like words, numbers or nickname. 
+But before the player will find a welcome board with first instructions and how to play the game. 
+Just underneath the board player will find a clear space to insert his name. They can type any kind of name like words,
+numbers or nickname. 
 
 
 ![New game](./Assets/Images/new-game.PNG)
@@ -57,7 +57,7 @@ Players will see 6 collums and 5 rows to guess. A number that its not between th
 
 ![invalid](./Assets/Images/invalid-guess.PNG)
 
-Game will not allow player try the same guess more than once. So if it happen a message will alert they that it was tried already to choose another guess. 
+The game will not allow the player to try the same guess. So if it happen a message will alert they that it was tried already to choose another guess. 
 
 ![Same Guess](./Assets/Images/same-guess.PNG)
 
@@ -86,7 +86,7 @@ Win the game who first guess all 4 boats. The game will display a message congra
 ## Features to Implement
 * Improved computer player logic for more strategic guesses.
 * Graphical user interface (GUI) for a more engaging gaming experience.
-* Difficulty levels for adjusting the computer player's skill level.
+* Difficulty levels to adjust the computer player's skill level.
 * Multiplayer mode to play against another human player.
 
 # Data Model
