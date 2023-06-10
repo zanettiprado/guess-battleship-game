@@ -105,12 +105,11 @@ The code was passed through [PEP8 Python Validator](https://pep8ci.herokuapp.com
 
 The following test cases were considered:
 
-Placing battleships randomly and ensuring they do not overlap.
-Validating user input for guesses and handling invalid inputs.
-Checking hits and misses during gameplay.
-Verifying game termination conditions.
-
-# Testing the play again feature.
+* Placing battleships randomly and ensuring they do not overlap.
+* Validating user input for guesses and handling invalid inputs.
+* Checking hits and misses during gameplay.
+* Verifying game termination conditions.
+* Abortion game option to execute end game or also start game again. 
 
 ## Solved Bugs
 * Computers boats were displaying the board 
@@ -140,6 +139,7 @@ Steps to deployment were followed from Code Institute learning material.
 # Credits
 This Battleship Game was created as an example by Felipe Zanetti for my 3rd milestone project. 
 The game concept is based on the classic board game Battleship.
+The [w3schools](https://www.w3schools.com/python/) where used for clarifications and updates. 
 The deployment steps provided in this README were adapted from the Code Institute learning material.
 Deployment
 
