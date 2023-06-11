@@ -33,17 +33,15 @@ You can try here the [Live version](https://guess-battleship-game.herokuapp.com/
 * The game should have a clear termination condition and offer the option to play again.
 
 # How to Play
-The game starts with the placement of battleships on both the player's and the computer's board.
-But before the player will find a welcome board with first instructions and how to play the game. 
-Just underneath the board player will find a clear space to insert his name. They can type any kind of name like words,
-numbers or nickname. 
+The game begins with the placement of battleships on both the player's and the computer's board. Prior to that, the player encounters a welcome board with initial instructions on how to play the game. Just below the board, there is a designated space for the player to enter their name, which can be any combination of words, numbers, or a nickname.
 
 
 ![New game](./Assets/Images/new-game.PNG)
 
 
 
-Players take turns guessing the coordinates of the opponent's battleships.
+* Players take turns guessing the coordinates of the opponent's battleships. In the players board you will find a ("B").
+It represents where players boats are positioned. 
 If a guess hits an opponent's battleship, it is marked as a hit ('*'), and the player scores a point.
 If a guess misses, it is marked as a miss ('X').
 
@@ -51,25 +49,23 @@ If a guess misses, it is marked as a miss ('X').
 ![Playing](./Assets/Images/playing.PNG)
 
 
-The game continues until one player sinks all of the opponent's battleships.
-During the game player has to find out where is the computer's boats into 30's space board proivde. 
-Players will see 6 collums and 5 rows to guess. A number that its not between the range from collum 1-6 and row 1-5 it will return an invalid guess. 
+* The game continues until one player manages to sink all of the opponent's battleships. Throughout the game, the player must determine the whereabouts of the computer's boats within the provided 30-space board. The board consists of 6 columns and 5 rows for the player to make guesses. Any guess outside the valid range of columns 1-6 and rows 1-5 will be considered an invalid guess and get a message informing that. 
 
 ![invalid](./Assets/Images/invalid-guess.PNG)
 
-The game will not allow the player to try the same guess. So if it happen a message will alert they that it was tried already to choose another guess. 
+* The game will not allow the player to try the same guess. So if it happen a message will alert they that it was tried already to choose another guess. 
 
 ![Same Guess](./Assets/Images/same-guess.PNG)
 
-Players can abort the game by entering '9' as a guess.
+* Players can abort the game by entering '9' as a guess.
 
 ![Aborting](./Assets/Images/aborting-game.PNG)
 
-The game provide also the score board with score of each player in real time after each guess. 
+* The game also provides a real-time score board, displaying the score of each player after every guess.
 
 ![Score Board](./Assets/Images/score-board.PNG)
 
-Win the game who first guess all 4 boats. The game will display a message congratulating and asking if player wants to play again. If he types "yes" the it will execute start game and the loop. If he types anything other than "yes" the code will execute end game function. 
+* The player who successfully guesses the positions of all four boats first wins the game. The game will display a congratulatory message and ask if the player wants to play again. Typing "yes" will initiate a new game and start the loop. Any other response will execute the end game function.
 
 ![end game](./Assets/Images/end-game.PNG)
 
@@ -118,28 +114,29 @@ The following test cases were considered:
 
 
 ## Unsolved Bug
-If the player plays too fast, the turn of the computer player may be missed, leading to consecutive turns for the player.
+* If the player plays too fast, the turn of the computer player may be missed, leading to consecutive turns for the player.
 
 
 # Deployment
 Steps to deployment were followed from Code Institute learning material.
+
 <br>
 
-* Sign in to your Heroku account.
-* Access the main page and click the "New" button in the top-right corner. Choose "Create New App" from the drop-down menu.
-* Choose a unique name for your app and select the region.
-* Once the app is created, go to the Deploy Tab and select the "Settings" Tab. Scroll down to "Config Vars".
-* Click "Reveal Config Vars" and enter "port" as the key, and "8000" as the value. Click "Add" to confirm the entry.
-* Next, enter your Google credentials into the "CREDS" key and value fields.
-* Go back to the Buildpack section and select "python", then click "Save Changes". Repeat this step to add "node.js", ensuring that the Buildpacks are in the correct order.
-* Go to the "Deploy" tab and select "Github" as the deployment method. Confirm that you want to connect to GitHub and search for the repository name.
-* Scroll to the bottom of the page and choose your preferred deployment type.
-* Finally, click "Manual Dedploy" or "Enable automatic update".
+1. Sign in to your Heroku account.
+2. Access the main page and click the "New" button in the top-right corner. Choose "Create New App" from the drop-down menu.
+3. Choose a unique name for your app and select the region.
+4. Once the app is created, go to the Deploy Tab and select the "Settings" Tab. Scroll down to "Config Vars".
+5. Click "Reveal Config Vars" and enter "port" as the key, and "8000" as the value. Click "Add" to confirm the entry.
+6. Next, enter your Google credentials into the "CREDS" key and value fields.
+7. Go back to the Buildpack section and select "python", then click "Save Changes". Repeat this step to add "node.js", ensuring that the Buildpacks are in the correct order.
+8. Go to the "Deploy" tab and select "Github" as the deployment method. Confirm that you want to connect to GitHub and search for the repository name.
+9. Scroll to the bottom of the page and choose your preferred deployment type.
+10. Finally, click "Manual Dedploy" or "Enable automatic update".
 
 # Credits
 This Battleship Game was created as an example by Felipe Zanetti for my 3rd milestone project. 
 The game concept is based on the classic board game Battleship.
-The [w3schools](https://www.w3schools.com/python/) where used for clarifications and updates. 
+The [w3schools](https://www.w3schools.com/python/) were used for clarifications and updates. 
 The deployment steps provided in this README were adapted from the Code Institute learning material.
 Deployment
 

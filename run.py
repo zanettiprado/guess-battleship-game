@@ -53,8 +53,10 @@ class Player:
             try:
                 col = int(col)
                 row = int(row)
+                is_col_valid = self.is_valid_input(col, 6)
+                is_row_valid = self.is_valid_input(row, 5)
 
-                if not self.is_valid_input(col, 6) or not self.is_valid_input(row, 5):
+                if not is_col_valid or not is_row_valid:
                     raise self.InvalidInputError
 
                 col -= 1
@@ -213,6 +215,7 @@ class BattleshipGame:
         except Exception as e:
             print("An error occurred during the game:", str(e))
             self.end_game()
+
     def end_game(self):
         """
         Displays the end of the game and asks the player if
